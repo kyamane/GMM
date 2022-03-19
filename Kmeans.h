@@ -1,17 +1,21 @@
-class KMeans{
+#include <vector>
+using namespace std;
+
+class KMeans
+{
 private:
-	int dimension_data;
-	int number_clusters;
+    int dimension_data;
+    int number_clusters;
 public:
-	double **centroid;
+    vector<vector<double>> centroid;
 
-	KMeans(int dimension_data, int number_clusters);
-	~KMeans();
+    KMeans(int dimension_data, int number_clusters);
+    ~KMeans();
 
-	// forgy method
-	void Initialize(int number_data, double **data);
+    // forgy method
+    void Initialize(int number_data, const vector<vector<double>>& data);
 
-	int Classify(double data[]);
+    int Classify(const vector<double>& data);
 
-	double Cluster(int number_data, double **data);
+    double Cluster(int number_data, const vector<vector<double>>& data);
 };
