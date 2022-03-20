@@ -2,9 +2,9 @@
 #include <iostream>
 #include <cmath>
 
-#include "GMM.h"
-#include "Kmeans.h"
-#include "Matrix.h"
+#include "gmm/GMM.h"
+#include "gmm/Kmeans.h"
+#include "gmm/Matrix.h"
 
 Gaussian_Mixture_Model::Gaussian_Mixture_Model(string type_covariance, int dimension_data, int number_gaussian_components)
 {

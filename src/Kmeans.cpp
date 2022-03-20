@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "Kmeans.h"
+#include "gmm/Kmeans.h"
 
 KMeans::KMeans(int dimension_data, int number_clusters)
 {

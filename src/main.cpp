@@ -1,7 +1,7 @@
 #include <fstream>
 #include <vector>
 
-#include "GMM.h"
+#include "gmm/GMM.h"
 
 int main(){
     string type_covariance = "full"; // <-> "diagonal"

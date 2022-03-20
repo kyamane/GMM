@@ -7,29 +7,33 @@ set(CMAKE_BUILD_TYPE Release)
 find_package(ament_cmake REQUIRED)
 
 add_library(${PROJECT_NAME}
-  GMM.h
-  GMM.cpp
-  Kmeans.h
-  Kmeans.cpp
-  Matrix.h
-  Matrix.cpp
+  src/GMM.cpp
+  src/Kmeans.cpp
+  src/Matrix.cpp
+)
+target_include_directories(${PROJECT_NAME}
+  PRIVATE
+  include
 )
 
 add_executable(${PROJECT_NAME}_test
-  main.cpp
-  GMM.h
-  GMM.cpp
-  Kmeans.h
-  Kmeans.cpp
-  Matrix.h
-  Matrix.cpp
+  src/main.cpp
+  src/GMM.cpp
+  src/Kmeans.cpp
+  src/Matrix.cpp
+)
+target_include_directories(${PROJECT_NAME}_test
+  PRIVATE
+  include
 )
 
 install(
   TARGETS ${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME}
 )
-
+install(DIRECTORY include/
+  DESTINATION include
+)
 install(
   TARGETS ${PROJECT_NAME}_test
   DESTINATION bin/${PROJECT_NAME}
