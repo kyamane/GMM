@@ -8,8 +8,8 @@ class Gaussian_Mixture_Model
 private:
     string type_covariance;
 
-    int dimension_data;
-    int number_gaussian_components;
+    int dimension_data{0};
+    int number_gaussian_components{0};
 public:
     vector<double> weight;  // [number_gaussian_components]
 
@@ -18,10 +18,10 @@ public:
     vector<vector<double>> diagonal_covariance;  // [number_gaussian_components][dimension_data]
     vector<vector<vector<double>>> covariance;  // [number_gaussian_components][dimension_data][dimension_data]
 
-    Gaussian_Mixture_Model(string type_covariance, int dimension_data, int number_gaussian_components);
+    Gaussian_Mixture_Model(string type_covariance = "full", int dimension_data = 2, int number_gaussian_components = 4);
     ~Gaussian_Mixture_Model();
 
-    void Initialize(int number_data, const vector<vector<double>>& data);
+    void Initialize(const vector<vector<double>>& data);
     void Load_Parameter(string path);
     void Save_Parameter(string path);
 
@@ -29,7 +29,7 @@ public:
 
     double Calculate_Likelihood(const vector<double>& data);
     double Calculate_Likelihood(const vector<double>& data, const vector<double>& gaussian_distribution);
-    double Expectaion_Maximization(int number_data, const vector<vector<double>>& data);
+    double Expectation_Maximization(const vector<vector<double>>& data);
     double Gaussian_Distribution(const vector<double>& data, int component_index);
     double Gaussian_Distribution(const vector<double>& data, const vector<double>& mean, const vector<double>& diagonal_covariance);
     double Gaussian_Distribution(const vector<double>& data, const vector<double>& mean, const vector<vector<double>>& covariance);

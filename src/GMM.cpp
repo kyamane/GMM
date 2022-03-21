@@ -42,13 +42,15 @@ Gaussian_Mixture_Model::~Gaussian_Mixture_Model()
 {
 }
 
-void Gaussian_Mixture_Model::Initialize(int number_data, const vector<vector<double>>& data)
+void Gaussian_Mixture_Model::Initialize(const vector<vector<double>>& data)
 {
+    int number_data = data.size();
     KMeans kmeans = KMeans(dimension_data, number_gaussian_components);
 
     kmeans.Initialize(number_data, data);
     while (kmeans.Cluster(number_data, data));
 
+    std::cout << "Kmeans:" << std::endl;
     for (int i = 0; i < number_gaussian_components; i++){
         for (int j = 0; j < dimension_data; j++){
             if (!type_covariance.compare("diagonal")){
@@ -63,6 +65,7 @@ void Gaussian_Mixture_Model::Initialize(int number_data, const vector<vector<dou
         for (int j = 0; j < dimension_data; j++){
             mean[i][j] = kmeans.centroid[i][j];
         }
+        std::cout << "  " << mean[i][0] << ", " << mean[i][1] << std::endl;
         weight[i] = 1.0 / number_gaussian_components;
     }
 }
@@ -175,9 +178,10 @@ double Gaussian_Mixture_Model::Calculate_Likelihood(const vector<double>& data, 
     return likelihood;
 }
 
-double Gaussian_Mixture_Model::Expectaion_Maximization(int number_data, const vector<vector<double>>& data)
+double Gaussian_Mixture_Model::Expectation_Maximization(const vector<vector<double>>& data)
 {
     double log_likelihood = 0.0;
+    int number_data = data.size();
 
     vector<double> gaussian_distribution(number_gaussian_components, 0.0);
     vector<double> sum_likelihood(number_gaussian_components, 0.0);

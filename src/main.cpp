@@ -30,9 +30,9 @@ int main(){
     for (int i = 0; i < number_iterations; i++){
         double log_likelihood;
 
-        if (i == 0) GMM.Initialize(number_data, data);
+        if (i == 0) GMM.Initialize(data);
 
-        log_likelihood = GMM.Expectaion_Maximization(number_data, data);
+        log_likelihood = GMM.Expectation_Maximization(data);
         if ((i + 1) % 10 == 0) printf("%d	%lf\n", i + 1, log_likelihood);
     }
 
