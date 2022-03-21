@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE Release)
 
 find_package(ament_cmake REQUIRED)
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   src/GMM.cpp
   src/Kmeans.cpp
   src/Matrix.cpp
@@ -27,16 +27,20 @@ target_include_directories(${PROJECT_NAME}_test
   include
 )
 
-install(
-  TARGETS ${PROJECT_NAME}
-  DESTINATION lib/${PROJECT_NAME}
+ament_export_include_directories(
+  include
+)
+ament_export_libraries(
+  ${PROJECT_NAME}
+)
+
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_test
+  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
 )
 install(DIRECTORY include/
   DESTINATION include
-)
-install(
-  TARGETS ${PROJECT_NAME}_test
-  DESTINATION bin/${PROJECT_NAME}
 )
 
 ament_package()
