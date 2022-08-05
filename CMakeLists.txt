@@ -1,10 +1,18 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.14)
 project(gmm)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Release)
 
-find_package(ament_cmake REQUIRED)
+find_package(catkin REQUIRED)
+
+catkin_package(
+  INCLUDE_DIRS
+  include
+
+  LIBRARIES
+  ${PROJECT_NAME}
+  )
 
 add_library(${PROJECT_NAME} SHARED
   src/GMM.cpp
@@ -27,13 +35,6 @@ target_include_directories(${PROJECT_NAME}_test
   include
 )
 
-ament_export_include_directories(
-  include
-)
-ament_export_libraries(
-  ${PROJECT_NAME}
-)
-
 install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_test
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
@@ -43,4 +44,3 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
-ament_package()
