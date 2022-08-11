@@ -50,7 +50,6 @@ void Gaussian_Mixture_Model::Initialize(const vector<vector<double>>& data)
     kmeans.Initialize(number_data, data);
     while (kmeans.Cluster(number_data, data));
 
-    std::cout << "Kmeans:" << std::endl;
     for (int i = 0; i < number_gaussian_components; i++){
         for (int j = 0; j < dimension_data; j++){
             if (!type_covariance.compare("diagonal")){
@@ -65,7 +64,6 @@ void Gaussian_Mixture_Model::Initialize(const vector<vector<double>>& data)
         for (int j = 0; j < dimension_data; j++){
             mean[i][j] = kmeans.centroid[i][j];
         }
-        std::cout << "  " << mean[i][0] << ", " << mean[i][1] << std::endl;
         weight[i] = 1.0 / number_gaussian_components;
     }
 }
